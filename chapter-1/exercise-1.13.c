@@ -1,33 +1,68 @@
 #include <stdio.h>
 
-#define MAXLENGTH 9
-#define MAXWORDS 99
-#define IN 0
-#define OUT 1
+#define MAXWORDS 100
+#define IN 1
+#define OUT 0
 
 int main() {
     int words[MAXWORDS] = {0};
-    int ch, wordlength, state, i;
-    wordlength = i = 0;
-    state = OUT;    
 
-    while ((ch = getchar()) != EOF) {
-        if (ch != ' ' && ch != '\t' && ch != '\n') {
-            ++wordlength;
+    int c, letters, state, i, maxlength;
+    state = OUT;
+    letters = i = maxlength = 0;
+
+    printf("Type whatever you would like, when you are done hit CTRL + D to finished the program\n");
+
+    while ((c = getchar()) != EOF) {
+        if (c != ' ' && c != '\t' && c != '\n') {
+            ++letters;
             state = IN;
-        }
+        } 
         else if (state) {
-            words[i] = wordlength;
+            if (letters > maxlength) {
+                maxlength = letters;
+            }
+            words[i] = letters;
+            letters = 0;
             ++i;
-            wordlength = 0;
             state = OUT;
         }
     }
-    for (int x = 0; x < i; ++x) {
-        for (int y = 1; y < words[x]; ++y) {
-            printf("x");
+
+    // Catch the case where EOF happens but no space or new line has been pressed
+    if (state) {
+        if (letters > maxlength) {
+            maxlength = letters;
         }
-        putchar('\n');
+        words[i] = letters;
+        ++i;
     }
-   return 0;
+
+
+
+    printf("\n---- Horizontal Histogram ----\n");
+    for (int y = 0; y < i; ++y) {
+        for (int x = 0; x < words[y]; ++x) {
+                printf("x");
+        }
+        if (words[y] != 0) {
+            printf("\n");
+        }
+    }
+
+    printf("\n---- Vertical Histogram ----\n");
+    while (maxlength > 0) {
+        for (int y = 0; y <= i; ++y) {
+            if (words[y] < maxlength) {
+                printf("   ");
+            } else {
+                printf(" x ");
+            }
+        }
+        --maxlength;
+        printf("\n");  
+    }
+
+    return 0;
 }
+
