@@ -5,25 +5,29 @@ float farenheit_converter(int x);
 
 
 int main() {
-    int input, choice;
+    int input, choice, answer;
 
     printf("Press 'f' to convert to Farenheit, 'c' for Celcius or CTRL+D to exit\n");
 
     while ((choice = getchar()) != EOF) {
         
+        printf("Enter a Tempreature to convert\n");
+
+        input = getchar();
+        
         if (choice == 'c') {
-            printf("Enter a Tempreature to convert\n");
-            printf("%3.2f\n", celcius_converter((input=getchar())));
+            answer = celcius_converter(input);
         }
         
         else if (choice == 'f') {
-            printf("Enter a Tempreature to convert to Farenheit\n");
-            printf("%3.2f\n", farenheit_converter((input=getchar())));
+            answer = farenheit_converter(input);
         }
 
         else {
             printf("Not a valid option\n");
         }
+        
+        printf("%3.2f\n", answer);
     }
     return 0;
 }
@@ -42,4 +46,5 @@ float farenheit_converter(int farenheit) {
     c = 5.0 / 9.0 * (farenheit + 32);
 
     return c;
-}    
+}  
+
