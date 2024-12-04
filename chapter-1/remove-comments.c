@@ -1,47 +1,42 @@
 #include <stdio.h>
 
-#define MAXLENGTH 200
-
 int main() {
-    FILE *file, *output;
-    int c;
-    char file_name[20], file_line[MAXLENGTH], processed_line[MAXLENGTH];
+    int c, d;
 
-    // Get user to input the file they want to remove comments from 
-    for (int i = 0; i < 20 && (c = getchar()) != '\n'; ++i) {
-         file_name[i] = c;
-    }
+    while ((c = getchar()) != EOF) {
 
-    // Open the file
-    file = fopen(file_name, "r");
+        // If the char is equal to a forward slash
+        if (c == '/') {
 
-    // Check for NULL pointer error
-    if (file == NULL) {
-        printf("Could not find file\n");
-        return 1;
-    }
+            // Check what the next char is
+            c = getchar();
+            
+            // If it's also a forward slash
+            if (c == '/') {
+                // Ignore everything until there is a new line
+                while ((c = getchar()) != '\n') {
+                    ;
+                } 
+            }
 
-    printf("File was opened\n");
+            // If it's a star
+            else if (c == '*') {
+                // Ignore everything until there is a star & forward slash next to each other
+                while ((c = getchar()) != '*' && (d = getchar()) != '/' ) {
+                    ;
+                }
+            }
 
-    
-    // Clearing the file (this is for testing only, as to not dup the output)
-    output = fopen("output.c", "w");
-    fputs("", output);
-    fclose(output);
-    
-    // Open a file to write the edited version of the program with no comments
-    output = fopen("output.c", "a");
-
-    while (fgets(file_line, MAXLENGTH, file) != NULL) {
-        for (int i = 0; i < MAXLENGTH && (file_line[i] != '/' && file_line[i] != '/'); ++i) {
-            fputc(file_line[i], output);
+            // Else just put the char to the output
+            else {
+            putchar(c);
+            }
         }
         
+        // Else just put the char to the output
+        else {
+            putchar(c);
+        }
     }
-
-    
-    // Close the file
-    fclose(file);
-    fclose(output);
     return 0;
 }
