@@ -33,12 +33,10 @@ int main() {
     output = fopen("output.c", "a");
 
     while (fgets(file_line, MAXLENGTH, file) != NULL) {
-        for (int i = 0; i < MAXLENGTH && file_line[i] != '/' && file_line[i+1] !=
-            '/'; ++i) {
-            processed_line[i] = file_line[i];
+        for (int i = 0; i < MAXLENGTH && (file_line[i] != '/' && file_line[i] != '/'); ++i) {
+            fputc(file_line[i], output);
         }
-         
-        fputs(processed_line, output);
+        
     }
 
     
