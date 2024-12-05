@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int c, d;
+    int c, next, temp;
 
     while ((c = getchar()) != EOF) {
 
@@ -21,9 +21,23 @@ int main() {
 
             // If it's a star
             else if (c == '*') {
+                next = temp = 0;
                 // Ignore everything until there is a star & forward slash next to each other
-                while ((c = getchar()) != '*' && (d = getchar()) != '/' ) {
-                    ;
+                while ((c = getchar()) != EOF) { 
+                    if (c == '/') {
+                        if (temp == '*') {
+                            break;
+                        }
+                    }
+                    else if (c == '*') {
+                        next = getchar();
+                        if (next == '/') {
+                            break;
+                        }
+                        else if (next == '*') {
+                            temp = next;
+                        }
+                    }
                 }
             }
 
