@@ -1,21 +1,42 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-int atoi(char hex[]);
+#define MAX 9
+int htoi(char hex[]);
 
 int main() {
-    int h;
-    char input[5] = "0xf1";
-    h = atoi(input);
-    printf("%d\n", h);
+    char user_input[MAX];
+    char c;
+
+    printf("Type a Hexidecimal number starting with '0x' you wish to convert\n");
+    for (int i = 0; i < MAX && (c = getchar()) != '\n'; ++i) {
+        user_input[i] = c;
+        printf("%s\n",user_input);
+    }
+    /*char s[10] = "0Xff32";*/
+    printf("%d\n", htoi(user_input));
     return 0;
 }
 
-int atoi(char s[]) {
-    int i, n;
-
-    n = 0;
-    for (i=0; s[i] >= '0' && s[i] <= '9'; ++i) {
-         n = 10 * n + (s[i] - '0');
-    }
+int htoi(char s[]) {
+    int n = 0;
+    printf("%s\n",s); 
+    // Get the len of the string
+    int len = strlen(s);
+    printf("%d", len);
+    // Iterate over each index in the string
+    for (int i = 0; i < len-1 && s[i] != '\n'; ++i) {
+        // Change each letter to lower case
+        s[i] = tolower(s[i]);
+        printf("%c\n", s[i]);
+        // If the char is a digit, - 0, else -87 to get the letters int value
+        if (i > 1 && isdigit(s[i])) {
+            n = 16 * n + (s[i] - '0');
+        }
+        else if (i > 1 && s[i]){
+            n = 16 * n + (s[i] - 87);
+        } 
+    } 
     return n;
 }
