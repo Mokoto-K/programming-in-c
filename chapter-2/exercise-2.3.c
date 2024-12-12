@@ -14,22 +14,21 @@ int main() {
         user_input[i] = c;
         printf("%s\n",user_input);
     }
-    /*char s[10] = "0Xff32";*/
     printf("%d\n", htoi(user_input));
     return 0;
 }
 
 int htoi(char s[]) {
     int n = 0;
-    printf("%s\n",s); 
+
     // Get the len of the string
     int len = strlen(s);
-    printf("%d", len);
+
     // Iterate over each index in the string
     for (int i = 0; i < len-1 && s[i] != '\n'; ++i) {
         // Change each letter to lower case
         s[i] = tolower(s[i]);
-        printf("%c\n", s[i]);
+
         // If the char is a digit, - 0, else -87 to get the letters int value
         if (i > 1 && isdigit(s[i])) {
             n = 16 * n + (s[i] - '0');
