@@ -1,5 +1,5 @@
-/*Given the basic framework, iits straight forward to extend the calculator. */
-/*Add the modulus  operator and provisions for negative numbers.*/
+/*Add commands to print the top element of the stack without popping, to dupplicate*/
+/*it and to swap the top two elements. Add a command to clear the stack.*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,11 +12,20 @@ int getop(char []);
 void push(double);
 double pop(void);
 
+
+#define MAXVAL 100
+
+int sp = 0;
+double val[MAXVAL];
+
+
 int main() {
 
     int type;
     double op2;
     char s[MAXOP];
+    double temp;
+    double second;
 
     while ((type = getop(s)) != EOF) {
         switch(type) {
@@ -47,6 +56,23 @@ int main() {
         case '\n':
             printf("\t%.8g\n", pop());
             break;
+        case 't':
+            printf("%lf\n", val[sp]);
+            break;
+        case 'd':
+            push(val[sp]);
+            break;
+        case 's':
+            temp = pop();
+            second = pop();
+            printf("%lf %lf\n", temp, second);
+            push(temp);
+            push(second);
+
+            break;
+        case 'w':
+            sp = 0;
+            break;
         default:
             printf("error: unknown command %s\n", s);
             break;
@@ -55,10 +81,6 @@ int main() {
     return 0;
 }
 
-#define MAXVAL 100
-
-int sp = 0;
-double val[MAXVAL];
 
 void push(double f) {
     if (sp < MAXVAL)
