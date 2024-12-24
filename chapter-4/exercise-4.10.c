@@ -119,7 +119,7 @@ void ungetch(int);
 int getop(char s[]) {
     int i, c;
 
-    printf(
+    printf("%s\n", ???));
     /*int i, c;*/
     /**/
     /*while ((s[0] = c = getch()) == ' ' || c == '\t')*/
