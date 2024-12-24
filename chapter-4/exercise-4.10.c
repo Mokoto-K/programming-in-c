@@ -1,5 +1,4 @@
-/*Suppose that there will never be more than none character of puchback. Modify*/
-/*getch and ungetch accordingly.*/
+/*Write a rountine ungets(s) that will push back an entrie string onto the input*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -120,73 +119,63 @@ void ungetch(int);
 int getop(char s[]) {
     int i, c;
 
-    while ((s[0] = c = getch()) == ' ' || c == '\t')
-        ;
-    s[1] = '\0';
-    if (!isdigit(c) && c != '.' && c != '-')
-        return c;
-    i = 0;
-   
-    if (c == '-') {
-        if (isdigit(s[++i] = c =getch())) {
-            ungetch(c);
-            --i;
-        }
-        else {
-            ungetch(c);
-            c = '-';
-            return c;
-        }
-    }
-    if (isdigit(c))
-        while (isdigit(s[++i] = c = getch()))
-            ;
-    if (c == '.')
-        while (isdigit(s[++i] = c = getch()))
-            ;
-    s[i] = '\0';
-    if (c != EOF)
-        ungetch(c);
+    printf(
+    /*int i, c;*/
+    /**/
+    /*while ((s[0] = c = getch()) == ' ' || c == '\t')*/
+    /*    ;*/
+    /*s[1] = '\0';*/
+    /*if (!isdigit(c) && c != '.' && c != '-')*/
+    /*    return c;*/
+    /*i = 0;*/
+    /**/
+    /*if (c == '-') {*/
+    /*    if (isdigit(s[++i] = c =getch())) {*/
+    /*        ungetch(c);*/
+    /*        --i;*/
+    /*    }*/
+    /*    else {*/
+    /*        ungetch(c);*/
+    /*        c = '-';*/
+    /*        return c;*/
+    /*    }*/
+    /*}*/
+    /*if (isdigit(c))*/
+    /*    while (isdigit(s[++i] = c = getch()))*/
+    /*        ;*/
+    /*if (c == '.')*/
+    /*    while (isdigit(s[++i] = c = getch()))*/
+    /*        ;*/
+    /*s[i] = '\0';*/
+    /*if (c != EOF)*/
+    /*    ungetch(c);*/
     return NUMBER;
 }
 
 #define BUFSIZE 100
 
-char buf;
+char buf[BUFSIZE];
 int bufp = 0;
 
 int getch(void) {
-    return (bufp > 0) ? bufp -= 1, buf : getchar();
+    return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 void ungetch(int c) {
-    if (bufp == 0) {
-        buf = c;
-        bufp +=1;
+    if (bufp >= BUFSIZE) 
+        printf("ungetch: too many characters\n");
+    else
+        buf[bufp++] = c;
+}
+
+void ungetchs(char s[]) {
+    if (bufp >=BUFSIZE) {
+        printf("ungetch: too many characters\n");
+    }
+    else  {
+        int length = strlen(s);
+        for(int i = length; i > 0; i--) {
+            buf[bufp++] = s[i];
+        }
     }
 }
-/*char buf[BUFSIZE];*/
-/*int bufp = 0;*/
-/**/
-/*int getch(void) {*/
-/*    return (bufp > 0) ? buf[--bufp] : getchar();*/
-/*}*/
-/**/
-/*void ungetch(int c) {*/
-/*    if (bufp >= BUFSIZE) */
-/*        printf("ungetch: too many characters\n");*/
-/*    else*/
-/*        buf[bufp++] = c;*/
-/*}*/
-/**/
-/*void ungetchs(char s[]) {*/
-/*    if (bufp >=BUFSIZE) {*/
-/*        printf("ungetch: too many characters\n");*/
-/*    }*/
-/*    else  {*/
-/*        int length = strlen(s);*/
-/*        for(int i = length; i > 0; i--) {*/
-/*            buf[bufp++] = s[i];*/
-/*        }*/
-/*    }*/
-/*}*/

@@ -1,5 +1,5 @@
-/*Suppose that there will never be more than none character of puchback. Modify*/
-/*getch and ungetch accordingly.*/
+/*Our getch and ungetch do not handle a pushed-back EOF correctly, Decide what*/
+/*their properties should be if an EOF is pushed baack, and impolement.*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -152,41 +152,29 @@ int getop(char s[]) {
 
 #define BUFSIZE 100
 
-char buf;
+int buf[BUFSIZE]; // not happy with this fix, i had to claude it.. not sure if 
+// skill issue or just overthinking the question trying to make big changes.
 int bufp = 0;
 
 int getch(void) {
-    return (bufp > 0) ? bufp -= 1, buf : getchar();
+    return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 void ungetch(int c) {
-    if (bufp == 0) {
-        buf = c;
-        bufp +=1;
+    if (bufp >= BUFSIZE) 
+        printf("ungetch: too many characters\n");
+    else
+        buf[bufp++] = c;
+}
+
+void ungetchs(char s[]) {
+    if (bufp >=BUFSIZE) {
+        printf("ungetch: too many characters\n");
+    }
+    else  {
+        int length = strlen(s);
+        for(int i = length; i > 0; i--) {
+            buf[bufp++] = s[i];
+        }
     }
 }
-/*char buf[BUFSIZE];*/
-/*int bufp = 0;*/
-/**/
-/*int getch(void) {*/
-/*    return (bufp > 0) ? buf[--bufp] : getchar();*/
-/*}*/
-/**/
-/*void ungetch(int c) {*/
-/*    if (bufp >= BUFSIZE) */
-/*        printf("ungetch: too many characters\n");*/
-/*    else*/
-/*        buf[bufp++] = c;*/
-/*}*/
-/**/
-/*void ungetchs(char s[]) {*/
-/*    if (bufp >=BUFSIZE) {*/
-/*        printf("ungetch: too many characters\n");*/
-/*    }*/
-/*    else  {*/
-/*        int length = strlen(s);*/
-/*        for(int i = length; i > 0; i--) {*/
-/*            buf[bufp++] = s[i];*/
-/*        }*/
-/*    }*/
-/*}*/
