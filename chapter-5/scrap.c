@@ -2,29 +2,27 @@
 
 void swap(int *a, int *b);
 int stringlen(char *s);
+
 int main() {
 
     int a[10];
-    int x;
-    int *pa;
-    
-    a[0] = 69;
-    a[1] = 666;
-    a[2] = 420;
 
+    int *pa;
+
+    /*a[0] = 69;*/
     pa = &a[0];
 
-    x = 1;
+    printf("%p %d\n", pa, *pa); 
+
+    int x;
+
+    x = *pa;
+
+    pa++;
+    printf("%p %d\n", pa, *pa); 
     
-    //*(pa+1);
 
-    printf("%p, %p\n", &a[x], a+x);
-
-    char word[] = "hello, world";
-
-    printf("%s is %d characters long \n", word, stringlen(word));
-
-
+    
     /*int x = 1, y = 2, z[10];*/
     /*int *ip;*/
     /**/
