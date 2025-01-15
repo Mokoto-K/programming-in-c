@@ -23,6 +23,11 @@ int main() {
     int length = stringlen(string);
 
     printf("string %s is %d chars long\n", string, length);
+
+    char *s = "abcdefghijklmnop";
+
+    printf("%c\n", *s);
+    printf("%c\n", *(++s));
     return 0;
 
 }
