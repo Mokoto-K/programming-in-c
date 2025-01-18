@@ -19,6 +19,9 @@ int main(int argc, char *argv[]) {
 
     while (--argc > 0) {
         num = getint(*++argv);
+        printf("%c\n", *argv[0]);
+
+        /*printf("%c\n", num); */
 
         if (num) {
             push(num);
@@ -27,6 +30,7 @@ int main(int argc, char *argv[]) {
         else {
             double one = pop();
             double two = pop();
+
             switch (*argv[0]) {
                 case '+': 
                     answer = two + one;
@@ -49,8 +53,10 @@ int main(int argc, char *argv[]) {
 }
 
 void push(double f) {
-    if (sp < MAXVAL)
+    if (sp < MAXVAL) {
+        /*printf("%f\n", f);*/
         val[sp++] = f;
+    }
     else 
         printf("Error: stack is full %g\n",f);
 }
@@ -59,7 +65,7 @@ double pop(void) {
     if (sp > 0)
         return val[--sp];
     else {
-        printf("Error: stack is empty\n");
+        /*printf("Error: stack is empty\n");*/
         return 0.0;
     }
 }
