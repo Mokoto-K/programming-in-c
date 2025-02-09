@@ -15,7 +15,6 @@ int main(int argc, char *argv[]) {
         while ((c = fgetc(fp)) != EOF) {
             printf("%c", c);
         }
-        :wq
 
         fclose(fp);
     }
