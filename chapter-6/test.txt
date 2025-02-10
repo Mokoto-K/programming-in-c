@@ -1,4 +1,10 @@
-This is a test document to test out an
+arrayofpoop = 1;
+arrayofpee = "hello";
+colourred = true;
+int abstractcow, abstractlamb, abstract, vegetable;
+This is a test document to test out and
 exercise that needs text input
 to see if it can output the text from 
 a text input
+int c = 0;
+str b = flase;
