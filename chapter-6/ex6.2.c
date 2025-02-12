@@ -1,64 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXLEN 5000
 
-struct node {
-    char *word;
-    int group;
-    struct node *next;
-};
-
-struct node *createnode(char *word){
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));  
-
-    if (newnode == NULL) {
-        printf("Error: Not enough memory to add a new node");
-        return NULL;
-    } 
-
-    newnode->word = word;
-    newnode->next = NULL;
-
-    return newnode;
-}
-
-int getword(FILE *);
-
-int main(int argc, char *argv[]) {
-  
-    int line = 1;
-    char c;
-
-    if (argc > 1) {
-        FILE *fp = fopen(argv[1], "r");
-        
-        /*getword(fp);*/
-        while ((c = fgetc(fp)) != EOF) {
-            printf("%c", c);
-        }
-
-        fclose(fp);
-    }
-    return 0;
-}
-
-int getword(FILE *fp) {
-    char c;
-    int i;
-    char *temp;
-
-    for (i = 0; (c = fgetc(fp)) != EOF; i++) {
-        if (c != '\n')
-            temp[i] = c;
-        else {
-         createnode(temp);
-         temp = "";
-         i = 0;
-        }
-
-    return c;
-}
+/*#include <stdio.h>*/
+/*#include <stdlib.h>*/
+/**/
+/*#define MAXLEN 5000*/
+/**/
+/*struct node {*/
+/*    char *word;*/
+/*    int group;*/
+/*    struct node *next;*/
+/*};*/
+/**/
+/*struct node *createnode(char *word){*/
+/*    struct node *newnode = (struct node *)malloc(sizeof(struct node));  */
+/**/
+/*    if (newnode == NULL) {*/
+/*        printf("Error: Not enough memory to add a new node");*/
+/*        return NULL;*/
+/*    } */
+/**/
+/*    newnode->word = word;*/
+/*    newnode->next = NULL;*/
+/**/
+/*    return newnode;*/
+/*}*/
+/**/
+/*int getword(FILE *);*/
+/**/
+/*int main(int argc, char *argv[]) {*/
+/**/
+/*    int line = 1;*/
+/*    char c;*/
+/**/
+/*    if (argc > 1) {*/
+/*        FILE *fp = fopen(argv[1], "r");*/
+/**/
+/*        /*getword(fp);*/
+/*        while ((c = fgetc(fp)) != EOF) {*/
+/*            printf("%c", c);*/
+/*        }*/
+/**/
+/*        fclose(fp);*/
+/*    }*/
+/*    return 0;*/
+/*}*/
+/**/
+/*int getword(FILE *fp) {*/
+/*    char c;*/
+/*    int i;*/
+/*    char *temp;*/
+/**/
+/*    for (i = 0; (c = fgetc(fp)) != EOF; i++) {*/
+/*        if (c != '\n')*/
+/*            temp[i] = c;*/
+/*        else {*/
+/*         createnode(temp);*/
+/*         temp = "";*/
+/*         i = 0;*/
+/*        }*/
+/*    }*/
+/**/
+/*    return c;*/
+/*}*/
 
 
 /*Exercise 1: Variable Name Grouping*/
